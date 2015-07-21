@@ -14,35 +14,38 @@ app.controller('chartCtrl', ['$scope', '$interval',
 
     this.barOptions = {
       seriesBarDistance: 15
+      // width: '500px',
+      // height: '350px'
     };
 
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
+    // function getRandomInt(min, max) {
+    //   return Math.floor(Math.random() * (max - min)) + min;
+    // }
 
-    function pushLimit(arr, elem, limit) {
-      arr.push(elem);
-      if (arr.length > limit) {
-        arr.splice(0, 1);
-      }
-    }
+    // function pushLimit(arr, elem, limit) {
+    //   arr.push(elem);
+    //   if (arr.length > limit) {
+    //     arr.splice(0, 1);
+    //   }
+    // }
 
-    var barUpdatePromise = $interval(function() {
-      var time = new Date();
+    // var barUpdatePromise = $interval(function() {
+    //   var time = new Date();
 
-      pushLimit(this.barData.labels, [
-        time.getHours(),
-        time.getMinutes(),
-        time.getSeconds()
-      ].join(':'), 12);
+    //   pushLimit(this.barData.labels, [
+    //     time.getHours(),
+    //     time.getMinutes(),
+    //     time.getSeconds()
+    //   ].join(':'), 12);
 
-      this.barData.series.forEach(function(series) {
-        pushLimit(series, getRandomInt(0, 10), 12);
-      });
-    }.bind(this), 1000);
+    //   this.barData.series.forEach(function(series) {
+    //     pushLimit(series, getRandomInt(0, 10), 12);
+    //   });
+    // }.bind(this), 1000);
 
-    $scope.$on('$destroy', function() {
-      $interval.cancel(barUpdatePromise);
-    });
+    // $scope.$on('$destroy', function() {
+    //   $interval.cancel(barUpdatePromise);
+    // });
+
 }]);
 })();
