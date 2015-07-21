@@ -3,6 +3,8 @@ var express = require('express');
 
 var app = module.exports = express();
 
+var server = require('http').createServer(app)
+
 var rootPath = path.dirname(__dirname);
 var port = Number(process.env.PORT || 9999);
 
@@ -11,7 +13,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 // Configure the socket.io object with our Express app
-require('./controllers/web-market-streamer.js')(app);
+require('./controllers/web-market-streamer.js')(server);
 
 // Set up the event logger
 require('./controllers/logger');
@@ -39,6 +41,6 @@ app.use(function(req, res) {
   res.render('index.html');
 });
 
-app.listen(port, function() {
+server.listen(port, function() {
   console.log('Server listening on port ' + port);
 });
